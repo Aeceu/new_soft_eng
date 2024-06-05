@@ -8,7 +8,7 @@ import { store } from "./redux/store.ts";
 import { Toaster } from "react-hot-toast";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <>
+  <React.StrictMode>
     <Toaster />
     <Provider store={store}>
       <Router>
@@ -17,5 +17,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         </Routes>
       </Router>
     </Provider>
-  </>
+  </React.StrictMode>
 );

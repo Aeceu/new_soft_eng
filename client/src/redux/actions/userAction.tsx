@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../api";
 import {
@@ -26,6 +27,7 @@ export const registerUser = createAsyncThunk(
       | null,
     { rejectWithValue }
   ) => {
+    if (!newUser) return;
     try {
       const { repassword, ...data } = newUser;
       const res = await axios.post("/user/signup", { newUser: data });
