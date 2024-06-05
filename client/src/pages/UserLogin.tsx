@@ -1,0 +1,97 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+import { userSignIn } from "../schema/userSignupSchema";
+import { UserSignIn } from "../redux/types/user";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../redux/store";
+import { Loader2 } from "lucide-react";
+import { setUserId } from "../redux/slices/userSlice";
+import axios from "../redux/api";
+import toast from "react-hot-toast";
+import { useState } from "react";
+
+const UserLogin = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<UserSignIn>({
+    resolver: zodResolver(userSignIn),
+  });
+
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+
+  const onSubmit: SubmitHandler<UserSignIn> = async (data: UserSignIn) => {
+    console.log(data);
+    try {
+      setLoading(true);
+      const res = await axios.post("/user/login", data, {
+        withCredentials: true,
+      });
+      dispatch(setUserId(res.data.id));
+      toast.success(res.data.message);
+      navigate("/auth/user/verify");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="w-full h-full flex flex-col items-center justify-center">
+      <h1 className="font-bold text-3xl">Log in</h1>
+      <p className="label text-sm mb-4">Manage your account, qr code and profile information.</p>
+      <form onSubmit={handleSubmit(onSubmit)} className="w-1/2 flex flex-col gap-4">
+        <label className="form-control w-full">
+          <input
+            type="email"
+            placeholder="Email"
+            className={`rounded-none input input-bordered  w-full h-[60px] ${
+              errors.email && "input-error"
+            }`}
+            {...register("email")}
+          />
+          {errors.email && (
+            <div className="label">
+              <span className="text-md label-text text-red-500 ">{errors.email.message}</span>
+            </div>
+          )}
+        </label>
+        <label className="form-control w-full ">
+          <input
+            type="password"
+            placeholder="Password"
+            className={`rounded-none input input-bordered  w-full h-[60px] ${
+              errors.password && "input-error"
+            }`}
+            {...register("password")}
+          />
+          {errors.password && (
+            <div className="label">
+              <span className="text-md label-text text-red-500 ">{errors.password.message}</span>
+            </div>
+          )}
+        </label>
+        <div className=" flex flex-col items-end justify-center">
+          <p className="mb-4 label flex items-center gap-2 text-sm w-max">
+            Don't have an account ?
+            <Link to="/auth/user/signup" className="text-primary font-semibold">
+              Sign up
+            </Link>
+          </p>
+          <button
+            disabled={loading}
+            type="submit"
+            className="btn bg-black text-2xl text-white rounded-none w-full h-[60px]">
+            {loading ? <Loader2 className="w-10 h-10 animate-spin" /> : "Log in"}
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};
+export default UserLogin;

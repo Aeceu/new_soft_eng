@@ -1,0 +1,136 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id         String   @id @default(uuid())
+  createdAt  DateTime @default(now())
+  isVerified Boolean  @default(false)
+
+  firstName    String
+  lastName     String
+  phone        String
+  email        String  @unique
+  username     String
+  password     String
+  role         String
+  refreshToken String? @db.Text()
+}
+
+model User {
+  id         String   @id @default(uuid())
+  createdAt  DateTime @default(now())
+  isVerified Boolean  @default(false)
+
+  firstName   String
+  middleName  String
+  lastName    String
+  suffix      String?
+  age         String
+  birthdate   String
+  birthplace  String
+  gender      String
+  religion    String
+  citizenship String
+  civil       String
+
+  email    String  
+  phone    String
+  landline String?
+
+  houseno   String
+  street    String
+  baranggay String
+  district  String
+  city      String
+  province  String
+  zipcode   String
+
+  elementary String?
+  attain     String?
+  highschool String?
+  attain1    String?
+  senior     String?
+  attain2    String?
+  college    String?
+  attain3    String?
+
+  employment   String?
+  occupation   String?
+  yearEmploy   String?
+  skill1       String?
+  skill2       String?
+  yearUnemploy String?
+  skill1_1     String?
+  skill2_1     String?
+
+  blood  String
+  height String
+  weight String
+
+  disability       String
+  visibility       String
+  made_disabled    String
+  status           String
+  device           String
+  specificDevice   String?
+  medicine         String
+  specificMedicine String?
+  others           String?
+  emergencyPerson  EmergencyPerson?
+
+  password     String
+  refreshToken String? @db.Text()
+  role String @default("user")
+
+  qr_code QRCode?
+}
+
+model EmergencyPerson {
+  id           String  @id @default(uuid())
+  firstName    String
+  middleName   String
+  lastName     String
+  suffix       String?
+  age          String
+  gender       String
+  relationship String
+  religion     String
+
+  email    String 
+  phone    String
+  landline String
+
+  houseno   String
+  street    String
+  baranggay String
+  district  String
+  province  String
+  city      String
+  zipcode   String
+  userId    String @unique
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model QRCode {
+  id         String   @id @default(uuid())
+  secure_url String
+  image_id   String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now())
+  userId     String?  @unique
+  user       User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model otp {
+  id        String @id @default(uuid())
+  userId    String
+  otp       String
+  createdAt String
+  expiredAt String
+}
