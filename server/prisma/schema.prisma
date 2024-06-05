@@ -3,8 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider = "cockroachdb"
+  url      = env("DATABASE_URL_1")
 }
 
 model Admin {
@@ -19,7 +19,7 @@ model Admin {
   username     String
   password     String
   role         String
-  refreshToken String? @db.Text()
+  refreshToken String? 
 }
 
 model User {
@@ -85,7 +85,7 @@ model User {
   emergencyPerson  EmergencyPerson?
 
   password     String
-  refreshToken String? @db.Text()
+  refreshToken String? 
   role String @default("user")
 
   qr_code QRCode?
