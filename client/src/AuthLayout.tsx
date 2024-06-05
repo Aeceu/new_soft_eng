@@ -1,11 +1,6 @@
-import { useSelector } from "react-redux";
-import { Outlet, useNavigate } from "react-router-dom";
-import { RootState } from "./redux/store";
+import { Outlet } from "react-router-dom";
 
 const AuthLayout = () => {
-  // const nav = useNavigate();
-  // const state = useSelector((state: RootState) => state);
-
   return (
     <div
       data-theme="light"
