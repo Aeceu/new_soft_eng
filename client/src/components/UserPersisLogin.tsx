@@ -30,7 +30,7 @@ const UserPersistsLogin = () => {
       {loading ? (
         <div
           data-theme="light"
-          className="poppins-regular flex items-center justify-center w-full h-screen">
+          className="poppins-regular flex items-center justify-center w-full h-screen animate-pulse">
           <h1>Loading ....</h1>
         </div>
       ) : (

@@ -44,13 +44,13 @@ export const stepOneSchema = z
   });
 
 export const stepTwoSchema = z.object({
-  houseno: z.string().min(1, "Required"),
-  street: z.string().min(1, "Required"),
-  baranggay: z.string().min(1, "Required"),
-  district: z.string().min(1, "Required"),
-  city: z.string().min(1, "Required"),
-  province: z.string().min(1, "Required"),
-  zipcode: z.string().min(1, "Required"),
+  region: z.string().min(2, "Select your region"),
+  province: z.string().min(2, "Select your province").optional(),
+  city: z.string().min(2, "Select your city").optional(),
+  baranggay: z.string().min(2, "Select your baranggay"),
+  houseno: z.string().min(1, "type your houseno"),
+  street: z.string().min(1, "type your street"),
+  zipcode: z.string().min(1, "Select your zipcode"),
 });
 
 export const stepThreeSchema = z.object({
@@ -78,13 +78,13 @@ export const stepThreeSchema = z.object({
   phone: z.string().min(1, "Required"),
   landline: z.string().optional(),
 
-  houseno: z.string().min(1, "Required"),
-  street: z.string().min(1, "Required"),
-  baranggay: z.string().min(1, "Required"),
-  district: z.string().min(1, "Required"),
-  city: z.string().min(1, "Required"),
-  province: z.string().min(1, "Required"),
-  zipcode: z.string().min(1, "Required"),
+  region: z.string().min(2, "Select your region"),
+  province: z.string().min(2, "Select your province").optional(),
+  city: z.string().min(2, "Select your city").optional(),
+  baranggay: z.string().min(2, "Select your baranggay"),
+  houseno: z.string().min(1, "type your houseno"),
+  street: z.string().min(1, "type your street"),
+  zipcode: z.string().min(1, "Select your zipcode"),
 });
 
 export const stepFourSchema = z.object({

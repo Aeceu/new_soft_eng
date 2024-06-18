@@ -46,9 +46,9 @@ model User {
   houseno   String
   street    String
   baranggay String
-  district  String
-  city      String
-  province  String
+  city      String?
+  province  String?
+  region  String
   zipcode   String
 
   elementary String?
@@ -109,10 +109,11 @@ model EmergencyPerson {
   houseno   String
   street    String
   baranggay String
-  district  String
-  province  String
-  city      String
+  city      String?
+  province  String?
+  region  String
   zipcode   String
+
   userId    String @unique
   user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

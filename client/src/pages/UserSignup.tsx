@@ -6,6 +6,8 @@ import Employment from "../components/signupsteps/Employment";
 import Medical from "../components/signupsteps/Medical";
 import Emergency from "../components/signupsteps/Emergency";
 import DoneRegister from "../components/signupsteps/DoneRegister";
+import { Link } from "react-router-dom";
+import { ChevronLeft } from "lucide-react";
 
 const UserSignup = () => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -15,7 +17,13 @@ const UserSignup = () => {
       <h1 className="font-bold text-4xl bg-black text-white w-full border-b p-8">
         User Registration Form
       </h1>
-      <div className="w-3/4 h-full overflow-y-auto bg-white flex flex-col items-center p-8 shadow-md">
+      <Link
+        to={"/auth/user/login"}
+        className="absolute left-0 top-[108px] flex items-center gap-1 shadow-md poppins-semibold text-white font-bold bg-[#4A00FF] p-2 rounded-tr-md rounded-br-md hover:scale-110 duration-300 transition-all">
+        <ChevronLeft className="w-5 h-5 " />
+        login
+      </Link>
+      <div className="relative w-3/4 h-full overflow-y-auto bg-white flex flex-col items-center p-8 shadow-md">
         <ul className="w-max shrink-0 steps steps-vertical lg:steps-horizontal gap-4">
           <li className={`step ${currentStep >= 0 && "step-primary"}`}>Personal </li>
           <li className={`step ${currentStep >= 1 && "step-primary"}`}>Address </li>

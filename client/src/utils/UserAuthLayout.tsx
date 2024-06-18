@@ -4,10 +4,9 @@ const UserAuthLayout = () => {
   return (
     <div className="w-full h-screen flex ">
       <div
-        className="w-[40%] h-full bg-cover "
+        className="w-[40%] h-full bg-center bg-no-repeat bg-cover "
         style={{
-          backgroundImage:
-            "url(https://images.pexels.com/photos/3009792/pexels-photo-3009792.jpeg?auto=compress&cs=tinysrgb&w=1980&h=1080&dpr=1)",
+          backgroundImage: "url(/bg_img.png)",
         }}>
         <div className="hero-overlay bg-opacity-50" />
         <h1 className="absolute top-3 left-3 font-bold text-2xl text-white">KAINAKAP</h1>

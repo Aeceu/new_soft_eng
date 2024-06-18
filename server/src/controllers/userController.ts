@@ -36,8 +36,8 @@ export const signup = async (req: Request, res: Response) => {
 
     const newCreatedUser = await prisma.user.create({
       data: {
-        password: hashPass,
         ...newUser,
+        password: hashPass,
         emergencyPerson: {
           create: {
             ...newUser.emergencyPerson,
@@ -47,7 +47,7 @@ export const signup = async (req: Request, res: Response) => {
     });
 
     //TODO: Generate Qr Code
-    const qrCodeLink = `http://localhost:5173/user/${newCreatedUser.id}`;
+    const qrCodeLink = `https://pwd-kainakap.vercel.app/user/${newCreatedUser.id}`;
     const qrCodeImage = await GenerateQRCode(qrCodeLink);
 
     const result = await cloudinary.uploader.upload(qrCodeImage, {
@@ -87,7 +87,7 @@ export const login = async (req: Request, res: Response) => {
       return res.status(403).json("User does not exists!");
     }
 
-    const validPass = data.password === userExists.password;
+    const validPass = bcrypt.compare(data.password, userExists.password);
     if (!validPass) {
       return res.status(400).json("Invalid password!");
     }
@@ -158,6 +158,10 @@ export const verifyOTP = async (req: Request, res: Response) => {
     const user = await prisma.user.findFirst({
       where: {
         id: userId,
+      },
+      include: {
+        emergencyPerson: true,
+        qr_code: true,
       },
     });
 

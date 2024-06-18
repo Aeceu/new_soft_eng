@@ -4,6 +4,6 @@ import { AppDispatch, RootState } from "../redux/store";
 const useRedux = () => {
   const state = useSelector((state: RootState) => state);
   const dispatch = useDispatch<AppDispatch>();
-  return { state, dispatch } as const;
+  return { state, dispatch };
 };
 export default useRedux;

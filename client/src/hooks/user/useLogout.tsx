@@ -3,6 +3,7 @@ import axios from "../../redux/api";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { handleLogout } from "../../redux/slices/userSlice";
+import toast from "react-hot-toast";
 
 export const useUserLogout = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -14,7 +15,7 @@ export const useUserLogout = () => {
         withCredentials: true,
       });
       console.log(res.data);
-      alert(res.data);
+      toast.success(res.data);
       navigate("/auth/user/login");
     } catch (error) {
       console.log(error);

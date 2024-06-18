@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import { setNewUser } from "../../redux/slices/userSlice";
 import { medications } from "../../data/medications";
+import toast from "react-hot-toast";
 
 type Props = {
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
@@ -29,7 +30,7 @@ const Medical: React.FC<Props> = ({ setCurrentStep }) => {
   const onSubmit: SubmitHandler<StepSix> = (data: StepSix) => {
     dispatch(setNewUser(data));
     console.log(state.newUser);
-    alert("success!");
+    toast.success("Medical Information done!");
     setCurrentStep((prev) => prev + 1);
   };
   return (
@@ -286,7 +287,7 @@ const Medical: React.FC<Props> = ({ setCurrentStep }) => {
           type="text"
           placeholder="type your specific device used here..."
           className="input input-bordered w-full max-w-xs"
-          {...register("specificDevice")}
+          {...register("specificMedicine")}
         />
         {errors.specificMedicine && (
           <div className="label">

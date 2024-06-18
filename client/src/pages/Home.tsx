@@ -3,6 +3,7 @@ import { RootState } from "../redux/store";
 
 const Home = () => {
   const state = useSelector((state: RootState) => state.user);
+
   return (
     <div className="w-full h-full relative flex flex-col  ">
       <div className="z-0 filter blur-[120px] opacity-50  bg-blue-500  rounded-full w-[700px] h-[700px] absolute left-[30%]" />
@@ -11,6 +12,7 @@ const Home = () => {
       <div className="z-0 filter blur-[120px] opacity-50  bg-fuchsia-500  rounded-full w-[700px] h-[700px] absolute left-[-10%] top-[30%]" />
       <div className="z-0 filter blur-[120px] opacity-50  bg-pink-500  rounded-full w-[700px] h-[700px] absolute right-[5%] top-[10%]" />
       <div className="z-0 filter blur-[120px] opacity-50  bg-orange-500  rounded-full w-[700px] h-[700px] absolute right-[0%] top-[20%]" />
+
       <div className="z-10 w-full shrink-0 h-[500px] flex flex-col  items-center justify-center">
         <h1 className="font-bold text-6xl ">THE EMPOWERING PWDS</h1>
         <p className="w-1/2 text-center mt-4">

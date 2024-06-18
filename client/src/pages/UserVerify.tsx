@@ -13,6 +13,7 @@ const UserVerify = () => {
   const state = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
+
   const handleVerify = async (e: FormEvent) => {
     e.preventDefault();
     try {

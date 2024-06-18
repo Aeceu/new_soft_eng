@@ -6,6 +6,7 @@ import { stepOneSchema } from "../../schema/userSignupSchema";
 import { setNewUser } from "../../redux/slices/userSlice";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
+import toast from "react-hot-toast";
 
 type Props = {
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
@@ -23,7 +24,7 @@ const Personal: React.FC<Props> = ({ setCurrentStep }) => {
   const onSubmit: SubmitHandler<StepOne> = (data: StepOne) => {
     console.log(data);
     dispatch(setNewUser(data));
-    alert("success!");
+    toast.success("Personal Information Done!");
     setCurrentStep((prev) => prev + 1);
   };
 
@@ -155,9 +156,7 @@ const Personal: React.FC<Props> = ({ setCurrentStep }) => {
           <span className="label-text">Gender</span>
         </div>
         <select className="select select-bordered" {...register("gender")}>
-          <option disabled selected>
-            Pick one
-          </option>
+          <option value={""}>Pick one</option>
           <option>Male</option>
           <option>Female</option>
           <option>Others</option>
@@ -174,9 +173,7 @@ const Personal: React.FC<Props> = ({ setCurrentStep }) => {
           <span className="label-text">Religion</span>
         </div>
         <select className="select select-bordered" {...register("religion")}>
-          <option disabled selected>
-            Pick one
-          </option>
+          <option value={""}>Pick one</option>
           <option>Roman Catholic</option>
           <option>Catholic</option>
           <option>Iglesia ni Cristo</option>
@@ -214,9 +211,7 @@ const Personal: React.FC<Props> = ({ setCurrentStep }) => {
           <span className="label-text">Civil Status</span>
         </div>
         <select className="select select-bordered" {...register("civil")}>
-          <option disabled selected>
-            Pick one
-          </option>
+          <option value={""}>Pick one</option>
           <option>Single</option>
           <option>Married</option>
           <option>Legally Separated</option>

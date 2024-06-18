@@ -89,6 +89,16 @@ const UserLogin = () => {
             className="btn bg-black text-2xl text-white rounded-none w-full h-[60px]">
             {loading ? <Loader2 className="w-10 h-10 animate-spin" /> : "Log in"}
           </button>
+          <div className="my-4 w-full flex items-center gap-2">
+            <div className="w-full h-[1px] border-b border-black/50" />
+            <h1 className="text-sm font-bold">or</h1>
+            <div className="w-full h-[1px] border-b border-black/50" />
+          </div>
+          <button
+            type="submit"
+            className="btn bg-[#4A00FF] hover:bg-violet-900 shadow-md text-2xl text-white rounded-none w-full h-[60px]">
+            Scan QR Code
+          </button>
         </div>
       </form>
     </div>

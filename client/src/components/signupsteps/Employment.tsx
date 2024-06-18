@@ -6,6 +6,7 @@ import { StepFive } from "../../redux/types/user";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { setNewUser } from "../../redux/slices/userSlice";
+import toast from "react-hot-toast";
 
 type Props = {
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
@@ -24,7 +25,7 @@ const Employment: React.FC<Props> = ({ setCurrentStep }) => {
   const onSubmit: SubmitHandler<StepFive> = (data: StepFive) => {
     console.log(data);
     dispatch(setNewUser(data));
-    alert("success!");
+    toast.success("Employment Information done!");
     setCurrentStep((prev) => prev + 1);
   };
 
@@ -39,9 +40,7 @@ const Employment: React.FC<Props> = ({ setCurrentStep }) => {
           <span className="label-text">Employment type</span>
         </div>
         <select className="select select-bordered" {...register("employment")}>
-          <option disabled selected>
-            Select your employment type
-          </option>
+          <option value={""}>Select your employment type</option>
           <option>Student</option>
           <option>Employed</option>
           <option>Unemployed</option>
@@ -127,54 +126,54 @@ const Employment: React.FC<Props> = ({ setCurrentStep }) => {
 
       <label className="col-start-2 form-control w-full max-w-xs">
         <div className="label">
-          <span className="label-text">Months/Years of being employed</span>
+          <span className="label-text">Months/Years of being unemployed</span>
         </div>
         <input
           disabled={watch().employment === "Unemployed" ? false : true}
           type="text"
           placeholder="type your months/years here..."
           className="input input-bordered w-full max-w-xs"
-          {...register("yearEmploy")}
+          {...register("yearUnemploy")}
         />
-        {errors.yearEmploy && (
+        {errors.yearUnemploy && (
           <div className="label">
-            <span className="text-xs label-text text-red-500 ">{errors.yearEmploy.message}</span>
+            <span className="text-xs label-text text-red-500 ">{errors.yearUnemploy.message}</span>
           </div>
         )}
       </label>
 
       <label className="form-control w-full max-w-xs">
         <div className="label">
-          <span className="label-text"> 1. Skills while being employed</span>
+          <span className="label-text"> 1. Skills while being unemployed</span>
         </div>
         <input
           disabled={watch().employment === "Unemployed" ? false : true}
           type="text"
           placeholder="type your skill here..."
           className="input input-bordered w-full max-w-xs"
-          {...register("skill1")}
+          {...register("skill3")}
         />
-        {errors.skill1 && (
+        {errors.skill3 && (
           <div className="label">
-            <span className="text-xs label-text text-red-500 ">{errors.skill1.message}</span>
+            <span className="text-xs label-text text-red-500 ">{errors.skill3.message}</span>
           </div>
         )}
       </label>
 
       <label className="form-control w-full max-w-xs">
         <div className="label">
-          <span className="label-text"> 2. Skills while being employed</span>
+          <span className="label-text"> 2. Skills while being unemployed</span>
         </div>
         <input
           disabled={watch().employment === "Unemployed" ? false : true}
           type="text"
           placeholder="type your skill here..."
           className="input input-bordered w-full max-w-xs"
-          {...register("skill2")}
+          {...register("skill4")}
         />
-        {errors.skill2 && (
+        {errors.skill4 && (
           <div className="label">
-            <span className="text-xs label-text text-red-500 ">{errors.skill2.message}</span>
+            <span className="text-xs label-text text-red-500 ">{errors.skill4.message}</span>
           </div>
         )}
       </label>

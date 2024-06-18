@@ -6,6 +6,7 @@ import { stepFourSchema } from "../../schema/userSignupSchema";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { setNewUser } from "../../redux/slices/userSlice";
+import toast from "react-hot-toast";
 type Props = {
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
 };
@@ -18,7 +19,7 @@ const Education: React.FC<Props> = ({ setCurrentStep }) => {
   const onSubmit: SubmitHandler<StepFour> = (data: StepFour) => {
     console.log(data);
     dispatch(setNewUser(data));
-    alert("success!");
+    toast.success("Education information done!");
     setCurrentStep((prev) => prev + 1);
   };
   return (
