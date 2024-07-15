@@ -1,6 +1,7 @@
 import express from "express";
 import {
   getUserById,
+  getUserByQR,
   handleRefreshToken,
   login,
   logout,
@@ -17,4 +18,5 @@ router.get("/user/logout", logout);
 router.get("/user/refresh", handleRefreshToken);
 
 router.get("/user/:id", getUserById);
+router.get("/user/qr/:userId", getUserByQR);
 export default router;

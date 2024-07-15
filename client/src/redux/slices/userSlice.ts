@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { StepFive, StepFour, StepOne, StepSix, StepThree, StepTwo, TUser } from "../types/user";
-import { loginUser, registerUser, verifyOTP } from "../actions/userAction";
+import { loginUser, loginViaQR, registerUser, verifyOTP } from "../actions/userAction";
 
 type initialStateType = {
   user: TUser | null;
@@ -92,6 +92,15 @@ const userSlice = createSlice({
         state.loading = true;
       })
       .addCase(verifyOTP.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload.user;
+        state.token = action.payload.token;
+        state.loginStatus = "completed";
+      })
+      .addCase(loginViaQR.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(loginViaQR.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload.user;
         state.token = action.payload.token;

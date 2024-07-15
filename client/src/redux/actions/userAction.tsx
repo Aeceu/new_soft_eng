@@ -58,7 +58,13 @@ export const verifyOTP = createAsyncThunk(
   "user/verifyOTP",
   async ({ otp, userId }: { userId: string; otp: string }) => {
     try {
-      const res = await axios.post("/user/verify", { otp, userId });
+      const res = await axios.post(
+        "/user/verify",
+        { otp, userId },
+        {
+          withCredentials: true,
+        }
+      );
       toast.success(res.data.message);
       return res.data;
     } catch (error) {
@@ -68,3 +74,18 @@ export const verifyOTP = createAsyncThunk(
     }
   }
 );
+
+export const loginViaQR = createAsyncThunk("user/loginViaQR", async (userId: string) => {
+  try {
+    const res = await axios.get(`/user/qr/${userId}`, {
+      withCredentials: true,
+    });
+    toast.success(res.data.message);
+    console.log(res.data);
+    return res.data;
+  } catch (error) {
+    toast.error("Failed to login user!");
+    const handledError = HandleApiError(error);
+    console.log(handledError);
+  }
+});

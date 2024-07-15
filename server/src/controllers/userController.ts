@@ -305,3 +305,61 @@ export const getUserById = async (req: Request, res: Response) => {
     res.status(500).json(error);
   }
 };
+
+export const getUserByQR = async (req: Request, res: Response) => {
+  try {
+    const userId = req.params.userId;
+
+    const user = await prisma.user.findFirst({
+      where: {
+        id: userId,
+      },
+      include: {
+        emergencyPerson: true,
+        qr_code: true,
+      },
+    });
+
+    if (!user) {
+      return res.status(403).json("User not found!");
+    }
+    const user_data = {
+      id: user.id,
+      email: user.email,
+      role: user.role,
+    };
+
+    const accessToken = jwt.sign(user_data, process.env.TOKEN_SECRET!, {
+      expiresIn: "10s",
+    });
+    const userRefreshToken = jwt.sign(user_data, process.env.TOKEN_SECRET!, {
+      expiresIn: "1d",
+    });
+
+    await prisma.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        refreshToken: userRefreshToken,
+      },
+    });
+
+    res.cookie("jwt", userRefreshToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      maxAge: 24 * 60 * 60 * 1000,
+    });
+
+    const userWithoutPass = exclude(user, ["password", "refreshToken"]);
+    res.status(200).json({
+      message: `${user?.role} AUTHENTICATED!`,
+      accessToken,
+      user: userWithoutPass,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+};

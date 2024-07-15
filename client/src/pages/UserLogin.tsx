@@ -94,11 +94,11 @@ const UserLogin = () => {
             <h1 className="text-sm font-bold">or</h1>
             <div className="w-full h-[1px] border-b border-black/50" />
           </div>
-          <button
-            type="submit"
+          <Link
+            to={"/auth/user/login/qrcode"}
             className="btn bg-[#4A00FF] hover:bg-violet-900 shadow-md text-2xl text-white rounded-none w-full h-[60px]">
             Scan QR Code
-          </button>
+          </Link>
         </div>
       </form>
     </div>

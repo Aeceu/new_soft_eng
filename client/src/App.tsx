@@ -13,6 +13,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AdminLayout from "./utils/AdminLayout";
 import AdminPersistsLogin from "./components/AdminPersisLogin";
 import UserPersistsLogin from "./components/UserPersisLogin";
+import ScanQR from "./pages/ScanQR";
 
 const App = () => {
   return (
@@ -35,6 +36,7 @@ const App = () => {
 
         <Route path="user" element={<UserAuthLayout />}>
           <Route path="login" element={<UserLogin />} />
+          <Route path="login/qrcode" element={<ScanQR />} />
           <Route path="verify" element={<UserVerify />} />
         </Route>
         <Route path="user/signup" element={<UserSignup />} />
